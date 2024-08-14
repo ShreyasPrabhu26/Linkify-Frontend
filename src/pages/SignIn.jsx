@@ -22,18 +22,18 @@ const LogIn = () => {
                     credentials: 'include'
                 };
 
-                const signinResponse = await fetch('https://linkify-api.shreyas.info/user', requestOptions);
+                const signinResponse = await fetch('http://localhost:8000/user', requestOptions);
 
                 if (!signinResponse.ok) {
                     const errorData = await signinResponse.json();
                     setError(errorData.error || 'An error occurred. Please try again.');
                 } else {
-                    const loginResponse = await fetch('https://linkify-api.shreyas.info/user/login', requestOptions);
+                    const loginResponse = await fetch('http://localhost:8000/user/login', requestOptions);
                     if (!loginResponse.ok) {
                         const errorData = await loginResponse.json();
                         setError(errorData.error || 'An error occurred. Please try again.');
                     } else {
-                        navigate('/');  // Redirect to home on successful login
+                        navigate('/');  // Redirect to home on successful login // Redirect to home on successful login
                     }
                 }
             } catch (err) {
@@ -96,12 +96,12 @@ const LogIn = () => {
                                 Sign In
                             </button>
                         </div>
-                        <div className="flex items-center justify-center">
-                            <a href="/login" className="text-blue-600 hover:underline">
-                                Already a user? Log in here
-                            </a>
-                        </div>
                     </form>
+                    <div className="flex items-center justify-center">
+                        <button onClick={() => navigate("/login")} className="text-blue-600 hover:underline">
+                            Already a user? Log in here
+                        </button>
+                    </div>
                 </div>
                 {/* Right Side */}
                 <div className="w-full md:w-1/2 bg-blue-500">

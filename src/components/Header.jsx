@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 
-const Header = ({ user }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn }) => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [cookies, setCookie, removeCookie] = useCookies(['access-token']);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
+    };
+
+    const handleLogout = () => {
+        removeCookie('access-token');
+        setIsLoggedIn(false); 
     };
 
     return (
@@ -17,13 +24,13 @@ const Header = ({ user }) => {
                 <div className="hidden md:flex gap-3">
                     <a href="https://www.linkedin.com/in/shreyasprabhu26/" target="_blank"
                         className="whitespace-nowrap bg-gray-200 text-gray-900 py-2 px-4 rounded">Contact US</a>
-                    {user ? (
-                        <a href="/logout" className="whitespace-nowrap bg-gray-200 text-gray-900 py-2 px-4 rounded">
+                    {isLoggedIn ? (
+                        <button onClick={handleLogout} className="whitespace-nowrap bg-gray-200 text-gray-900 py-2 px-4 rounded">
                             Log Out
-                        </a>
+                        </button>
                     ) : (
                         <>
-                            <a href="/signin" className="whitespace-nowrap block bg-gray-200 text-gray-900 py-2 px-4 rounded">
+                            <a href="/signup" className="whitespace-nowrap block bg-gray-200 text-gray-900 py-2 px-4 rounded">
                                 Sign Up
                             </a>
                             <a href="/login" className="whitespace-nowrap block bg-white text-blue-600 py-2 px-4 rounded">
@@ -42,7 +49,7 @@ const Header = ({ user }) => {
             <div id="mobile-menu" className={`${menuOpen ? 'block' : 'hidden'} md:hidden`}>
                 <a href="https://www.linkedin.com/in/shreyasprabhu26/" target="_blank"
                     className="block bg-gray-200 text-gray-900 py-2 px-4">Contact US</a>
-                {!user && (
+                {!isLoggedIn && (
                     <>
                         <a href="/signup" className="whitespace-nowrap block bg-gray-200 text-gray-900 py-2 px-4">Sign Up</a>
                         <a href="/login" className="whitespace-nowrap block bg-white text-blue-600 py-2 px-4">Login</a>
