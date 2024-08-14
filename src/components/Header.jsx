@@ -23,7 +23,7 @@ const Header = ({ user }) => {
                         </a>
                     ) : (
                         <>
-                            <a href="/signup" className="whitespace-nowrap block bg-gray-200 text-gray-900 py-2 px-4 rounded">
+                            <a href="/signin" className="whitespace-nowrap block bg-gray-200 text-gray-900 py-2 px-4 rounded">
                                 Sign Up
                             </a>
                             <a href="/login" className="whitespace-nowrap block bg-white text-blue-600 py-2 px-4 rounded">
