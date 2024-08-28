@@ -22,18 +22,18 @@ const LogIn = () => {
                     credentials: 'include'
                 };
 
-                const signinResponse = await fetch('http://localhost:8000/user', requestOptions);
+                const signinResponse = await fetch('http://localhost:8000/api/v1/user', requestOptions);
 
                 if (!signinResponse.ok) {
                     const errorData = await signinResponse.json();
                     setError(errorData.error || 'An error occurred. Please try again.');
                 } else {
-                    const loginResponse = await fetch('http://localhost:8000/user/login', requestOptions);
+                    const loginResponse = await fetch('http://localhost:8000/api/v1/user/login', requestOptions);
                     if (!loginResponse.ok) {
                         const errorData = await loginResponse.json();
                         setError(errorData.error || 'An error occurred. Please try again.');
                     } else {
-                        navigate('/');  // Redirect to home on successful login // Redirect to home on successful login
+                        navigate('/dashboard');
                     }
                 }
             } catch (err) {
@@ -43,7 +43,7 @@ const LogIn = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="flex items-center justify-center ">
             <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
                 {/* Left Side */}
                 <div className="w-full md:w-1/2 p-8">

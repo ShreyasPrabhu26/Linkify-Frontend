@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { redirect, useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
 const LogIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const [cookies, setCookie] = useCookies(['access-token']);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,13 +21,12 @@ const LogIn = () => {
                     body: JSON.stringify({ email, password }),
                 };
 
-                const loginResponse = await fetch('http://localhost:8000/user/login', requestOptions);
+                const loginResponse = await fetch('http://localhost:8000/api/v1/user/login', requestOptions);
                 const jsonData = await loginResponse.json();
                 if (!loginResponse.ok) {
                     setError(jsonData.error || 'An error occurred. Please try again.');
                 } else {
-                    setCookie("access-token", jsonData.token)
-                    navigate('/');  // Redirect to home on successful login
+                    navigate('/dashboard');
                 }
             }
             catch (err) {
@@ -39,7 +36,7 @@ const LogIn = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="flex items-center justify-center">
             <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
                 {/* Left Side */}
                 <div className="w-full md:w-1/2 p-8">

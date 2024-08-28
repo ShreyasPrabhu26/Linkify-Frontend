@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { useCookies } from 'react-cookie';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
+    const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
-    const [cookies, setCookie, removeCookie] = useCookies(['access-token']);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
 
     const handleLogout = () => {
-        removeCookie('access-token');
-        setIsLoggedIn(false); 
+        setIsLoggedIn(false);
+        navigate('/');
     };
 
     return (
@@ -25,17 +25,22 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                     <a href="https://www.linkedin.com/in/shreyasprabhu26/" target="_blank"
                         className="whitespace-nowrap bg-gray-200 text-gray-900 py-2 px-4 rounded">Contact US</a>
                     {isLoggedIn ? (
-                        <button onClick={handleLogout} className="whitespace-nowrap bg-gray-200 text-gray-900 py-2 px-4 rounded">
-                            Log Out
-                        </button>
+                        <>
+                            <button onClick={() => navigate('/dashboard')} className="whitespace-nowrap bg-gray-200 text-gray-900 py-2 px-4 rounded">
+                                Dashboard
+                            </button>
+                            <button onClick={handleLogout} className="whitespace-nowrap bg-gray-200 text-gray-900 py-2 px-4 rounded">
+                                Log Out
+                            </button>
+                        </>
                     ) : (
                         <>
-                            <a href="/signup" className="whitespace-nowrap block bg-gray-200 text-gray-900 py-2 px-4 rounded">
+                            <Link to="/signin" className="whitespace-nowrap block bg-gray-200 text-gray-900 py-2 px-4 rounded">
                                 Sign Up
-                            </a>
-                            <a href="/login" className="whitespace-nowrap block bg-white text-blue-600 py-2 px-4 rounded">
+                            </Link>
+                            <Link to="/login" className="whitespace-nowrap block bg-white text-blue-600 py-2 px-4 rounded">
                                 Login
-                            </a>
+                            </Link>
                         </>
                     )}
                 </div>
@@ -51,8 +56,8 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                     className="block bg-gray-200 text-gray-900 py-2 px-4">Contact US</a>
                 {!isLoggedIn && (
                     <>
-                        <a href="/signup" className="whitespace-nowrap block bg-gray-200 text-gray-900 py-2 px-4">Sign Up</a>
-                        <a href="/login" className="whitespace-nowrap block bg-white text-blue-600 py-2 px-4">Login</a>
+                        <Link to="/signin" className="whitespace-nowrap block bg-gray-200 text-gray-900 py-2 px-4">Sign Up</Link>
+                        <Link to="/login" className="whitespace-nowrap block bg-white text-blue-600 py-2 px-4">Login</Link>
                     </>
                 )}
             </div>
