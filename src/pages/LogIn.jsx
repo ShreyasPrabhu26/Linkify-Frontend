@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { redirect, useNavigate } from 'react-router-dom';
 
-const LogIn = () => {
+const LogIn = ({ setIsLoggedIn }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -26,6 +26,8 @@ const LogIn = () => {
                 if (!loginResponse.ok) {
                     setError(jsonData.error || 'An error occurred. Please try again.');
                 } else {
+                    setIsLoggedIn(true);
+                    localStorage.setItem("access-token", jsonData["access-token"])
                     navigate('/dashboard');
                 }
             }

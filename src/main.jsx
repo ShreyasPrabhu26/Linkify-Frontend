@@ -12,16 +12,16 @@ const Main = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const checkAuthResponse = await fetch('http://localhost:8000/api/v1/user/checkAuthorization');
-      if (!checkAuthResponse.ok) {
+    const checkAuth = () => {
+      const access_token = localStorage.getItem("access-token");
+      if (!access_token) {
         setIsLoggedIn(false);
       } else {
         setIsLoggedIn(true);
       }
     };
     checkAuth();
-  }, [cookies]);
+  }, []);
 
   return (
     <div className='bg-blue-100 text-gray-900'>
@@ -29,8 +29,8 @@ const Main = () => {
       <div className='container mx-auto px-4 py-8'>
         <Routes>
           <Route path='/' element={<App />} />
-          <Route path='/login' element={<LogIn />} />
-          <Route path='/signin' element={<SignIn />} />
+          <Route path='/login' element={<LogIn setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path='/signin' element={<SignIn setIsLoggedIn={setIsLoggedIn} />} />
           <Route path='/dashboard' element={<Dashboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
           <Route path='*' element={<div>Not Found</div>} />
         </Routes>

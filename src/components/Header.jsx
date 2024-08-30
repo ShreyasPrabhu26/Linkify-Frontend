@@ -10,6 +10,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
     };
 
     const handleLogout = () => {
+        localStorage.removeItem("access-token");
         setIsLoggedIn(false);
         navigate('/');
     };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const LogIn = () => {
+const SignIn = ({ setIsLoggedIn }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -23,18 +23,13 @@ const LogIn = () => {
                 };
 
                 const signinResponse = await fetch('http://localhost:8000/api/v1/user', requestOptions);
-
                 if (!signinResponse.ok) {
                     const errorData = await signinResponse.json();
                     setError(errorData.error || 'An error occurred. Please try again.');
                 } else {
-                    const loginResponse = await fetch('http://localhost:8000/api/v1/user/login', requestOptions);
-                    if (!loginResponse.ok) {
-                        const errorData = await loginResponse.json();
-                        setError(errorData.error || 'An error occurred. Please try again.');
-                    } else {
-                        navigate('/dashboard');
-                    }
+                    setIsLoggedIn(true)
+                    localStorage.setItem("access-token", jsonData["access-token"])
+                    navigate('/dashboard');
                 }
             } catch (err) {
                 setError('Failed to connect to the server. Please try again later.');
@@ -112,4 +107,4 @@ const LogIn = () => {
     );
 };
 
-export default LogIn;
+export default SignIn;
