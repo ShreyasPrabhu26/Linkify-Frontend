@@ -26,7 +26,7 @@ const ShortenUrlForm = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:8000/api/v1/url/shorten', requestOptions);
+            const response = await fetch('https://linkify-api.shreyas.info/api/v1/url/shorten', requestOptions);
             const jsonData = await response.json();
 
             if (!response.ok) {

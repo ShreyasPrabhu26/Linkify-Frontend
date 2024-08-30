@@ -16,7 +16,7 @@ const Dashboard = ({ isLoggedIn, setIsLoggedIn }) => {
                     navigate("/login");
                 }
 
-                const allUrlResponse = await fetch('http://localhost:8000/api/v1/url/allUrlInfo', {
+                const allUrlResponse = await fetch('https://linkify-api.shreyas.info/api/v1/url/allUrlInfo', {
                     headers: {
                         "Authorization": `Bearer ${access_token}`
                     }

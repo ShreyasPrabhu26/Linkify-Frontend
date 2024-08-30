@@ -21,7 +21,7 @@ const LogIn = ({ setIsLoggedIn }) => {
                     body: JSON.stringify({ email, password }),
                 };
 
-                const loginResponse = await fetch('http://localhost:8000/api/v1/user/login', requestOptions);
+                const loginResponse = await fetch('https://linkify-api.shreyas.info/api/v1/user/login', requestOptions);
                 const jsonData = await loginResponse.json();
                 if (!loginResponse.ok) {
                     setError(jsonData.error || 'An error occurred. Please try again.');

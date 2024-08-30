@@ -22,7 +22,7 @@ const SignIn = ({ setIsLoggedIn }) => {
                     credentials: 'include'
                 };
 
-                const signinResponse = await fetch('http://localhost:8000/api/v1/user', requestOptions);
+                const signinResponse = await fetch('https://linkify-api.shreyas.info/api/v1/user', requestOptions);
                 if (!signinResponse.ok) {
                     const errorData = await signinResponse.json();
                     setError(errorData.error || 'An error occurred. Please try again.');
