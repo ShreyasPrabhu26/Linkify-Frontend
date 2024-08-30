@@ -3,7 +3,7 @@ import ShortenUrlForm from "../components/ShortenUrlForm";
 import UrlList from '../components/UrlList';
 import { useNavigate } from 'react-router-dom';
 
-const Dashboard = ({ isLoggedIn, setIsLoggedIn }) => {
+const Dashboard = () => {
     const navigate = useNavigate();
     const [allUrlInformation, setAllUrlInformation] = useState([]);
 

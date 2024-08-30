@@ -31,7 +31,7 @@ const Main = () => {
           <Route path='/' element={<App />} />
           <Route path='/login' element={<LogIn setIsLoggedIn={setIsLoggedIn} />} />
           <Route path='/signin' element={<SignIn setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path='/dashboard' element={<Dashboard isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path='/dashboard' element={<Dashboard />} />
           <Route path='*' element={<div>Not Found</div>} />
         </Routes>
       </div>
